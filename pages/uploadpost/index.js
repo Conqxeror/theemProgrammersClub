@@ -69,7 +69,7 @@ export default function UploadArticle() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    if (!session?.user) {
+    if (!session.session?.user) {
       setError('You must be logged in to post an article.');
       return;
     }
@@ -83,7 +83,7 @@ export default function UploadArticle() {
     const requestObj = {
       title: title,
       content: content,
-      user: session.user.email,
+      user: session.session.user.email,
       dateAdded: new Date().toString(),
     };
   
@@ -104,6 +104,7 @@ export default function UploadArticle() {
         setContent('');
         // router.push('/success');
         console.log("Post created successfully!!!")
+        router.push('/');
       } else {
         console.error('Error creating post:', response.statusText);
       }
